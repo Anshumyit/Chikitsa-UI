@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
 
-
-
 class ReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final days = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
         automaticallyImplyLeading: false,
         title: Padding(
-          padding:  EdgeInsets.only(left: 10),
-          child: Text("Report",style: TextStyle(fontWeight: FontWeight.bold),),
+          padding: EdgeInsets.only(left: 10),
+          child: Text(
+            "Report",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
         ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
@@ -34,8 +36,11 @@ class ReportScreen extends StatelessWidget {
                   child: Column(
                     children: [
                       Padding(
-                        padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.5),
-                        child: Text("Today's Report", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                        padding: EdgeInsets.only(right: MediaQuery.of(context).size.width * 0.5),
+                        child: Text(
+                          "Today's Report",
+                          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       SizedBox(height: 16),
                       Row(
@@ -61,7 +66,7 @@ class ReportScreen extends StatelessWidget {
                 child: ListTile(
                   title: Text("Check Dashboard"),
                   subtitle: Text("Here you will find everything related to your active and past medicines."),
-                  trailing:  Container(
+                  trailing: Container(
                     height: 50,
                     width: 50,
                     child: CustomPaint(
@@ -82,15 +87,17 @@ class ReportScreen extends StatelessWidget {
               SizedBox(height: 8),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
-                children: [
-                  DayCircle(day: "SUN", isSelected: true),
-                  DayCircle(day: "MON"),
-                  DayCircle(day: "TUE"),
-                  DayCircle(day: "WED"),
-                  DayCircle(day: "THU"),
-                  DayCircle(day: "FRI"),
+                children: const [
+                  DayCircle(dayNumber: 1, isSelected: true),
+                  DayCircle(dayNumber: 2),
+                  DayCircle(dayNumber: 3),
+                  DayCircle(dayNumber: 4),
+                  DayCircle(dayNumber: 5),
+                  DayCircle(dayNumber: 6),
                 ],
               ),
+              // Show day name based on index
+
               SizedBox(height: 16),
               // Morning Medications
               MedicationSection(
@@ -129,7 +136,6 @@ class ReportScreen extends StatelessWidget {
           ),
         ),
       ),
-
     );
   }
 }
@@ -152,16 +158,23 @@ class ReportSummary extends StatelessWidget {
 }
 
 class DayCircle extends StatelessWidget {
-  final String day;
+  final int dayNumber;
   final bool isSelected;
 
-  DayCircle({required this.day, this.isSelected = false});
+  const DayCircle({required this.dayNumber, this.isSelected = false});
 
   @override
   Widget build(BuildContext context) {
     return CircleAvatar(
+      radius: 20,
       backgroundColor: isSelected ? Colors.blue : Colors.grey[200],
-      child: Text(day, style: TextStyle(color: isSelected ? Colors.white : Colors.black)),
+      child: Text(
+        dayNumber.toString(),
+        style: TextStyle(
+          color: isSelected ? Colors.white : Colors.black,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
     );
   }
 }
@@ -220,7 +233,6 @@ class MedicationCard extends StatelessWidget {
     );
   }
 }
-
 
 class CircularChartPainter extends CustomPainter {
   @override
