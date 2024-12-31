@@ -6,8 +6,13 @@ class ReportScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: Text("Report"),
+        automaticallyImplyLeading: false,
+        title: Padding(
+          padding:  EdgeInsets.only(left: 10),
+          child: Text("Report",style: TextStyle(fontWeight: FontWeight.bold),),
+        ),
         backgroundColor: Colors.white,
         foregroundColor: Colors.black,
         elevation: 0,
@@ -20,6 +25,7 @@ class ReportScreen extends StatelessWidget {
             children: [
               // Today's Report
               Card(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -27,7 +33,10 @@ class ReportScreen extends StatelessWidget {
                   padding: const EdgeInsets.all(16.0),
                   child: Column(
                     children: [
-                      Text("Today's Report", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      Padding(
+                        padding: EdgeInsets.only(right: MediaQuery.of(context).size.width*0.5),
+                        child: Text("Today's Report", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
+                      ),
                       SizedBox(height: 16),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -45,13 +54,20 @@ class ReportScreen extends StatelessWidget {
               SizedBox(height: 16),
               // Check Dashboard
               Card(
+                color: Colors.white,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
                   title: Text("Check Dashboard"),
                   subtitle: Text("Here you will find everything related to your active and past medicines."),
-                  trailing: Icon(Icons.pie_chart, color: Colors.teal),
+                  trailing:  Container(
+                    height: 50,
+                    width: 50,
+                    child: CustomPaint(
+                      painter: CircularChartPainter(),
+                    ),
+                  ),
                 ),
               ),
               SizedBox(height: 16),
@@ -182,6 +198,7 @@ class MedicationCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color: Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(12),
       ),
@@ -202,4 +219,53 @@ class MedicationCard extends StatelessWidget {
       ),
     );
   }
+}
+
+
+class CircularChartPainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    final paint = Paint()
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 8;
+
+    // Draw the background circle
+    paint.color = Colors.grey[200]!;
+    canvas.drawCircle(
+      Offset(size.width / 2, size.height / 2),
+      size.width / 2,
+      paint,
+    );
+
+    // Draw the segments
+    paint.color = Colors.red;
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      -0.5,
+      1,
+      false,
+      paint,
+    );
+
+    paint.color = Colors.orange;
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      0.5,
+      1,
+      false,
+      paint,
+    );
+
+    paint.color = Colors.green;
+    canvas.drawArc(
+      Rect.fromLTWH(0, 0, size.width, size.height),
+      1.5,
+      1,
+      false,
+      paint,
+    );
+  }
+
+  @override
+  bool shouldRepaint(covariant CustomPainter oldDelegate) => false;
 }
