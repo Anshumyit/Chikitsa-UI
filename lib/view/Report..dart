@@ -64,7 +64,7 @@ class ReportScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: ListTile(
-                  title: Text("Check Dashboard"),
+                  title: Text("Check Dashboard",style: TextStyle(fontWeight: FontWeight.bold),),
                   subtitle: Text("Here you will find everything related to your active and past medicines."),
                   trailing: Container(
                     height: 50,
@@ -253,8 +253,8 @@ class CircularChartPainter extends CustomPainter {
     paint.color = Colors.red;
     canvas.drawArc(
       Rect.fromLTWH(0, 0, size.width, size.height),
-      -0.5,
-      1,
+      0.5,
+      2,
       false,
       paint,
     );
@@ -262,8 +262,8 @@ class CircularChartPainter extends CustomPainter {
     paint.color = Colors.orange;
     canvas.drawArc(
       Rect.fromLTWH(0, 0, size.width, size.height),
-      0.5,
-      1,
+      1.5,
+      1.5,
       false,
       paint,
     );
@@ -271,8 +271,8 @@ class CircularChartPainter extends CustomPainter {
     paint.color = Colors.green;
     canvas.drawArc(
       Rect.fromLTWH(0, 0, size.width, size.height),
-      1.5,
-      1,
+      2.5,
+      2.5,
       false,
       paint,
     );

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutterassigment/view/Addmedicin.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class MedicineScreen extends StatefulWidget {
   @override
@@ -10,6 +11,7 @@ class _MedicineState extends State<MedicineScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: _buildAppBar(),
       body: Column(
         children: [
@@ -104,13 +106,13 @@ class _MedicineState extends State<MedicineScreen> {
       children: [
         _buildMedicineSection('Morning 08:00 am', [
           _buildMedicineCard('Calpol 500mg Tablet', 'Before Breakfast', 'Day 01', 'Taken', Colors.green),
-          _buildMedicineCard('Calpol 500mg Tablet', 'Before Breakfast', 'Day 27', 'Missed', Colors.red),
+          _buildMedicineCar('Calpol 500mg Tablet', 'Before Breakfast', 'Day 27', 'Missed', Colors.red),
         ]),
         _buildMedicineSection('Afternoon 02:00 pm', [
           _buildMedicineCard('Calpol 500mg Tablet', 'After Food', 'Day 01', 'Snoozed', Colors.orange),
         ]),
         _buildMedicineSection('Night 09:00 pm', [
-          _buildMedicineCard('Calpol 500mg Tablet', 'Before Sleep', 'Day 03', 'Left', Colors.grey),
+          _buildMedicineCa('Calpol 500mg Tablet', 'Before Sleep', 'Day 03', 'Left', Colors.grey),
         ]),
       ],
     );
@@ -134,12 +136,75 @@ class _MedicineState extends State<MedicineScreen> {
 
   Widget _buildMedicineCard(String medName, String instruction, String day, String status, Color statusColor) {
     return Card(
+      color: HexColor('#f6f8ff'),
       margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
       child: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Row(
           children: [
-            Icon(Icons.medication, color: Colors.blue, size: 40),
+            Image.asset('images/meimage.png',height: 40,),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(medName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(instruction, style: TextStyle(color: Colors.grey[600])),
+                  Text(day, style: TextStyle(color: Colors.grey[600])),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Icon(Icons.notifications, color: statusColor, size: 24),
+                Text(status, style: TextStyle(color: statusColor, fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildMedicineCar(String medName, String instruction, String day, String status, Color statusColor) {
+    return Card(
+      color: HexColor('#f6f8ff'),
+      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Image.asset('images/circle12.png',height: 40,),
+            SizedBox(width: 16),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(medName, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                  Text(instruction, style: TextStyle(color: Colors.grey[600])),
+                  Text(day, style: TextStyle(color: Colors.grey[600])),
+                ],
+              ),
+            ),
+            Column(
+              children: [
+                Icon(Icons.notifications, color: statusColor, size: 24),
+                Text(status, style: TextStyle(color: statusColor, fontWeight: FontWeight.bold)),
+              ],
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+  Widget _buildMedicineCa(String medName, String instruction, String day, String status, Color statusColor) {
+    return Card(
+      color: HexColor('#f6f8ff'),
+      margin: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      child: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Row(
+          children: [
+            Image.asset('images/injection.png',height: 40,),
             SizedBox(width: 16),
             Expanded(
               child: Column(
